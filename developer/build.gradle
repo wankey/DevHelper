@@ -1,0 +1,63 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+versioning {
+  // required (number)
+  major = 1
+  minor = 0
+  // force patch, optional (number)
+  patch = 0
+  dependsOn = "install"
+  // optional (any string)
+  preRelease = 'SNAPSHOT'
+}
+
+ext {
+  // Library Settings
+  libraryDescription = "a module provide some debug tools and panel for android"
+  libraryLabels = ['android', 'developer', 'debug']
+  bintrayName = "devTool"
+  libraryName = bintrayName
+  artifact = bintrayName
+}
+
+android {
+  compileSdkVersion 28
+
+  defaultConfig {
+    minSdkVersion 14
+    targetSdkVersion 28
+    versionCode versioning.code
+    versionName versioning.name
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+  }
+}
+
+dependencies {
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+  implementation "androidx.appcompat:appcompat:1.0.0-beta01"
+  implementation "androidx.constraintlayout:constraintlayout:1.1.2"
+  implementation "io.reactivex.rxjava2:rxjava:2.2.0"
+  implementation "com.tbruyelle.rxpermissions2:rxpermissions:0.9.5"
+  implementation 'io.github.wankey.mithril:mithril:0.0.1'
+
+  implementation "com.squareup.leakcanary:leakcanary-android:1.6.1"
+  implementation "com.facebook.stetho:stetho:1.5.0"
+  implementation "com.facebook.stetho:stetho-okhttp3:1.5.0"
+  implementation "hu.supercluster:paperwork:1.2.7"
+  implementation "com.jakewharton:process-phoenix:2.0.0"
+  implementation "com.squareup.retrofit2:retrofit-mock:2.4.0"
+  implementation "com.jakewharton.scalpel:scalpel:1.1.2"
+  implementation "com.jakewharton.madge:madge:1.1.4"
+}
+
+apply from: '../script/maven-install.gradle'
+apply from: '../script/maven-publish.gradle'
+apply from: '../script/jfrog-bintray-publish.gradle'
