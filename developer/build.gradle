@@ -4,10 +4,10 @@ apply plugin: 'kotlin-android-extensions'
 
 versioning {
   // required (number)
-  major = 1
+  major = 0
   minor = 0
   // force patch, optional (number)
-  patch = 0
+  patch = 1
   dependsOn = "install"
   // optional (any string)
   preRelease = 'SNAPSHOT'
@@ -46,9 +46,9 @@ dependencies {
   implementation "androidx.constraintlayout:constraintlayout:1.1.2"
   implementation "io.reactivex.rxjava2:rxjava:2.2.0"
   implementation "com.tbruyelle.rxpermissions2:rxpermissions:0.9.5"
-  implementation 'io.github.wankey.mithril:mithril:0.0.1'
 
   implementation "com.squareup.leakcanary:leakcanary-android:1.6.1"
+  implementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.1'
   implementation "com.facebook.stetho:stetho:1.5.0"
   implementation "com.facebook.stetho:stetho-okhttp3:1.5.0"
   implementation "hu.supercluster:paperwork:1.2.7"
@@ -58,6 +58,10 @@ dependencies {
   implementation "com.jakewharton.madge:madge:1.1.4"
 }
 
-apply from: 'https://raw.githubusercontent.com/wankey/Script/master/maven-install.gradle'
-apply from: 'https://raw.githubusercontent.com/wankey/Script/master/maven-publish.gradle'
-apply from: 'https://raw.githubusercontent.com/wankey/Script/master/jfrog-bintray-publish.gradle'
+//apply from: 'https://raw.githubusercontent.com/wankey/Script/master/maven-install.gradle'
+//apply from: 'https://raw.githubusercontent.com/wankey/Script/master/maven-publish.gradle'
+//apply from: 'https://raw.githubusercontent.com/wankey/Script/master/jfrog-bintray-publish.gradle'
+
+apply from: 'https://coding.net/u/wankey/p/usage_script/git/raw/master/maven-install.gradle'
+apply from: 'https://coding.net/u/wankey/p/usage_script/git/raw/master/maven-publish.gradle'
+apply from: 'https://coding.net/u/wankey/p/usage_script/git/raw/master/jfrog-bintray-publish.gradle'

@@ -41,6 +41,7 @@
   <string name="label_madge">Madge</string>
   <string name="label_scalpel">Scalpel</string>
   <string name="label_scalpel_view_id">Show View Id</string>
-  <string name="label_scalpel_interaction">Show 3D Interaction</string>
+  <string name="label_scalpel_interaction">Show 3D </string>
   <string name="label_scalpel_wireframe">Show Wireframe</string>
+  <string name="label_madge_ratio">Show ratio</string>
 </resources>

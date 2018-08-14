@@ -10,7 +10,7 @@ import io.github.wankey.mithril.developer.ui.BindableAdapter
  */
 class EndpointAdapter(context: Context) : BindableAdapter<String>(context) {
   companion object {
-    const val DEFAULT_MOCK_MODE = "Mock Mode"
+    const val DEFAULT_MOCK_MODE = "Mock"
   }
 
   private val endpoints = with(context) {
