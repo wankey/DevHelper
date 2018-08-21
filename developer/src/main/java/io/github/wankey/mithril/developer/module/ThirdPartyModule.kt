@@ -74,6 +74,14 @@ class ThirdPartyModule : DeveloperModule, OnCheckedChangeListener {
       }
       switchScalpel -> {
         containerScalpel.visibility = if (checked) View.VISIBLE else View.GONE
+        if (!checked) {
+          val view = (context as Activity).findViewById<View>(android.R.id.content)
+          val scalpelFrameLayout = findView(view, ScalpelFrameLayout::class)
+          (scalpelFrameLayout as ScalpelFrameLayout).isLayerInteractionEnabled = false
+          switchScalpelDrawView.isEnabled = false
+          switchScalpelDrawViewId.isEnabled = false
+          switchScalpelInteraction.isChecked = false
+        }
       }
       switchScalpelInteraction -> {
         val view = (context as Activity).findViewById<View>(android.R.id.content)

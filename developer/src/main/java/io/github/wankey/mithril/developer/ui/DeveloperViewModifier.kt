@@ -11,16 +11,15 @@ import android.view.WindowManager
 import androidx.drawerlayout.widget.DrawerLayout
 import com.jakewharton.madge.MadgeFrameLayout
 import com.jakewharton.scalpel.ScalpelFrameLayout
-import io.github.wankey.mithril.ViewModifier
 import io.github.wankey.mithril.developer.R
 
 
 /**
  * @author wankey
  */
-class DeveloperViewModifier : ViewModifier {
+class DeveloperViewModifier {
 
-  override fun modify(view: View): View {
+  fun modify(view: View): View {
     val madgeView = MadgeFrameLayout(view.context)
     val scalpelView = ScalpelFrameLayout(view.context)
     scalpelView.addView(view)

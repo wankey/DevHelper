@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.appcompat.app.AlertDialog
 import com.jakewharton.processphoenix.ProcessPhoenix
 import io.github.wankey.mithril.developer.R
 import io.github.wankey.mithril.developer.module.DeveloperModule
+import io.github.wankey.mithril.developer.ui.OnItemSelectedListener
 import retrofit2.mock.NetworkBehavior
 import java.util.concurrent.TimeUnit.MILLISECONDS
 
@@ -77,7 +77,56 @@ class ApiModule(private val networkBehavior: NetworkBehavior) : DeveloperModule,
     val currentProxyPort: String? = context.getStringPref(KEY_PROXY_PORT, null)
     proxyAdapter = ProxyAdapter(context, if (currentProxyIp == null) null else "$currentProxyIp:$currentProxyPort")
     spinnerProxy.adapter = proxyAdapter
-    spinnerProxy.setSelection(proxyAdapter.getPosition())
+    spinnerProxy.setSelection(proxyAdapter.getPosition(), false)
+
+    spinnerEndpoint.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+      override fun onNothingSelected(parent: AdapterView<*>?) {
+      }
+
+      override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        this@ApiModule.onItemSelected(parent, view, position, id)
+
+      }
+    }
+    spinnerDelay.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+      override fun onNothingSelected(parent: AdapterView<*>?) {
+      }
+
+      override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        this@ApiModule.onItemSelected(parent, view, position, id)
+      }
+    }
+    spinnerVariance.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+      override fun onNothingSelected(parent: AdapterView<*>?) {
+      }
+
+      override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        this@ApiModule.onItemSelected(parent, view, position, id)
+      }
+    }
+    spinnerError.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
+      override fun onNothingSelected(parent: AdapterView<*>?) {
+      }
+
+      override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        this@ApiModule.onItemSelected(parent, view, position, id)
+      }
+    }
+    spinnerProxy.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+      var fromUser = false
+      override fun onNothingSelected(parent: AdapterView<*>?) {
+      }
+
+      override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        if (!fromUser) {
+          fromUser = true
+          return
+        }
+        this@ApiModule.onItemSelected(parent, view, position, id)
+
+      }
+    }
 
     when (currentEndpoint) {
       EndpointAdapter.DEFAULT_MOCK_MODE -> {
@@ -94,11 +143,6 @@ class ApiModule(private val networkBehavior: NetworkBehavior) : DeveloperModule,
       }
     }
 
-    spinnerEndpoint.onItemSelectedListener = this
-    spinnerDelay.onItemSelectedListener = this
-    spinnerVariance.onItemSelectedListener = this
-    spinnerError.onItemSelectedListener = this
-    spinnerProxy.onItemSelectedListener = this
     return view
   }
 
@@ -120,18 +164,13 @@ class ApiModule(private val networkBehavior: NetworkBehavior) : DeveloperModule,
   override fun onStop() {
   }
 
-  override fun onNothingSelected(p0: AdapterView<*>?) {
-  }
-
-  var checkedId = 0
   override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, position: Int, id: Long) {
-    if (++checkedId < 6) {
-      return
-    }
     when (adapterView) {
       spinnerEndpoint -> {
         context.putStringPref(KEY_ENDPOINT, endpointAdapter.getItem(position))
-        spinnerEndpoint.postDelayed({ ProcessPhoenix.triggerRebirth(context) }, 200)
+        spinnerEndpoint.postDelayed(fun() {
+          ProcessPhoenix.triggerRebirth(context)
+        }, 200)
       }
       spinnerDelay -> {
         val value = delayAdapter.getItem(position)
@@ -173,8 +212,8 @@ class ApiModule(private val networkBehavior: NetworkBehavior) : DeveloperModule,
     customizeDialog.setView(dialogView)
     customizeDialog.setPositiveButton(android.R.string.ok) { dialogInterface, _ ->
       run {
-        val etIp = dialogView.findViewById<EditText>(R.id.et_ip)
-        val etPort = dialogView.findViewById<EditText>(R.id.et_port)
+        val etIp: EditText = dialogView.findViewById(R.id.et_ip)
+        val etPort: EditText = dialogView.findViewById(R.id.et_port)
         context.putStringPref(KEY_PROXY_IP, etIp.text.toString())
         context.putStringPref(KEY_PROXY_PORT, etPort.text.toString())
         dialogInterface.dismiss()
@@ -189,6 +228,7 @@ class ApiModule(private val networkBehavior: NetworkBehavior) : DeveloperModule,
     }
     customizeDialog.show()
   }
+
 
   private fun Context.getStringPref(name: String, defaultValue: String? = null): String? {
     val sharedPreferences = getSharedPreferences(packageName, android.content.Context.MODE_PRIVATE)
