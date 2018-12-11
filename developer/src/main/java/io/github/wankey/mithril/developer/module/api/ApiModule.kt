@@ -80,37 +80,54 @@ class ApiModule(private val networkBehavior: NetworkBehavior) : DeveloperModule,
     spinnerProxy.setSelection(proxyAdapter.getPosition(), false)
 
     spinnerEndpoint.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+      var fromUser = false
       override fun onNothingSelected(parent: AdapterView<*>?) {
       }
 
       override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        this@ApiModule.onItemSelected(parent, view, position, id)
-
+        when {
+          !fromUser -> fromUser = true
+          else -> this@ApiModule.onItemSelected(parent, view, position, id)
+        }
       }
     }
     spinnerDelay.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+      var fromUser = false
+
       override fun onNothingSelected(parent: AdapterView<*>?) {
       }
 
       override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        this@ApiModule.onItemSelected(parent, view, position, id)
+        when {
+          !fromUser -> fromUser = true
+          else -> this@ApiModule.onItemSelected(parent, view, position, id)
+        }
       }
     }
     spinnerVariance.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+      var fromUser = false
+
       override fun onNothingSelected(parent: AdapterView<*>?) {
       }
 
       override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        this@ApiModule.onItemSelected(parent, view, position, id)
+        when {
+          !fromUser -> fromUser = true
+          else -> this@ApiModule.onItemSelected(parent, view, position, id)
+        }
       }
     }
     spinnerError.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+      var fromUser = false
 
       override fun onNothingSelected(parent: AdapterView<*>?) {
       }
 
       override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        this@ApiModule.onItemSelected(parent, view, position, id)
+        when {
+          !fromUser -> fromUser = true
+          else -> this@ApiModule.onItemSelected(parent, view, position, id)
+        }
       }
     }
     spinnerProxy.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -119,12 +136,10 @@ class ApiModule(private val networkBehavior: NetworkBehavior) : DeveloperModule,
       }
 
       override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        if (!fromUser) {
-          fromUser = true
-          return
+        when {
+          !fromUser -> fromUser = true
+          else -> this@ApiModule.onItemSelected(parent, view, position, id)
         }
-        this@ApiModule.onItemSelected(parent, view, position, id)
-
       }
     }
 
