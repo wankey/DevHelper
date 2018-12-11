@@ -7,10 +7,10 @@ versioning {
   major = 0
   minor = 0
   // force patch, optional (number)
-  patch = 1
+  patch = 2
   dependsOn = "install"
   // optional (any string)
-  preRelease = 'SNAPSHOT'
+//  preRelease = 'SNAPSHOT'
 }
 
 ext {
