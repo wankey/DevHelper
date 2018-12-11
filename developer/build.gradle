@@ -10,7 +10,7 @@ versioning {
   patch = 2
   dependsOn = "install"
   // optional (any string)
-//  preRelease = 'SNAPSHOT'
+  preRelease = 'SNAPSHOT'
 }
 
 ext {
@@ -58,10 +58,10 @@ dependencies {
   implementation "com.jakewharton.madge:madge:1.1.4"
 }
 
-//apply from: 'https://raw.githubusercontent.com/wankey/Script/master/maven-install.gradle'
-//apply from: 'https://raw.githubusercontent.com/wankey/Script/master/maven-publish.gradle'
-//apply from: 'https://raw.githubusercontent.com/wankey/Script/master/jfrog-bintray-publish.gradle'
+apply from: 'https://raw.githubusercontent.com/wankey/Script/master/maven-install.gradle'
+apply from: 'https://raw.githubusercontent.com/wankey/Script/master/maven-publish.gradle'
+apply from: 'https://raw.githubusercontent.com/wankey/Script/master/jfrog-bintray-publish.gradle'
 
-apply from: 'https://coding.net/u/wankey/p/usage_script/git/raw/master/maven-install.gradle'
-apply from: 'https://coding.net/u/wankey/p/usage_script/git/raw/master/maven-publish.gradle'
-apply from: 'https://coding.net/u/wankey/p/usage_script/git/raw/master/jfrog-bintray-publish.gradle'
+//apply from: 'https://coding.net/u/wankey/p/usage_script/git/raw/master/maven-install.gradle'
+//apply from: 'https://coding.net/u/wankey/p/usage_script/git/raw/master/maven-publish.gradle'
+//apply from: 'https://coding.net/u/wankey/p/usage_script/git/raw/master/jfrog-bintray-publish.gradle'
