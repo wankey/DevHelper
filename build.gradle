@@ -1,19 +1,20 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-  ext.kotlin_version = '1.3.10'
+  ext.kotlin_version = '1.3.11'
   repositories {
     google()
     jcenter()
+    mavenLocal()
     maven { url "https://plugins.gradle.org/m2/" }
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:3.4.0-alpha07'
+    classpath 'com.android.tools.build:gradle:3.4.0-alpha09'
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
     classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
-    classpath 'eu.davidea:grabver:1.0.0'
+    classpath 'eu.davidea:grabver:1.0.1'
     classpath "com.github.ben-manes:gradle-versions-plugin:0.20.0"
     classpath "hu.supercluster:paperwork-plugin:1.2.7"
 
@@ -45,6 +46,7 @@ allprojects {
 
   repositories {
     google()
+    mavenLocal()
     jcenter()
     maven { url 'https://jitpack.io' }
     maven { url "https://dl.bintray.com/wankey/maven/" }
